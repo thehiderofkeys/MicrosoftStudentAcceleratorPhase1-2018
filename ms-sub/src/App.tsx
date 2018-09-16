@@ -54,14 +54,13 @@ export default class App extends React.Component<{},IState> {
     return (
       <div className="container-fluid">
         <div className="centreText">
+          <h1>Find Anime</h1>
+          <body>Have an Anime that you only know part of the title? No worries! you can find it here.</body>
           <div className="dropZone">
           <TextField
           id="name"
           label="Search"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          placeholder="eg.Coughing"
+          placeholder="eg.Inital"
           value={this.state.query}
           onChange={this.onText}
           margin="normal"
@@ -72,7 +71,7 @@ export default class App extends React.Component<{},IState> {
           {
             this.state.result === " " && !(this.state.query === "") ?
             <CircularProgress thickness={3} />:
-            <p>{this.state.result}</p>
+            <b><p>{this.state.result}</p></b>
           }
           </div>
         </div>
