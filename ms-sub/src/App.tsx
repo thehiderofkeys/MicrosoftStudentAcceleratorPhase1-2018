@@ -20,9 +20,9 @@ export default class App extends React.Component<{},IState> {
       textfield: this.onText.bind(this)
     }
   }
-  public onText(q: any) {
+  public onText=(event:any) => {
     this.setState({
-      query: q.value,
+      query: event.target.value,
     });
   }
   public buttonPressed(){
@@ -32,10 +32,23 @@ export default class App extends React.Component<{},IState> {
     this.search(this.state.query)
   }
   public search(patientToSearch: any){
-    fetch('api.flutrack.org/?s=headache')
-    .then(response => response.json()).then(data => {
-      this.setState({result: data})
+    
+    fetch('https://api.jikan.moe/v3/search/anime?q='+patientToSearch, {
+      headers: {
+        'Accept': 'application/json',
+      },
+      method: 'GET',
     })
+    .then((response : any) => response.json().then((data :any) =>{
+      console.log(data)
+      this.setState({
+        result: "Looks like the anime you're looking for is: "+data.results[0].title
+      })
+    })).catch(err => {
+      this.setState({
+        result: "Oh oh! Something went wrong, make sure to type three characters or more."
+      })
+    });
   }
   public render() {
     return (
@@ -50,7 +63,7 @@ export default class App extends React.Component<{},IState> {
           }}
           placeholder="eg.Coughing"
           value={this.state.query}
-          onChange={this.state.textfield}
+          onChange={this.onText}
           margin="normal"
           />
           <Button onClick={this.state.button}>Search</Button>
