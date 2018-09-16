@@ -12,8 +12,11 @@ export const Header: React.StatelessComponent<{}> = () => {
                     <HomeIcon/>
                 </IconButton>
                 </Link>
-                <Link to="/FirstComponent">
-                    <Button style={{color: "white"}} >FirstComponent</Button>
+                <Link to="/Project">
+                    <Button style={{color: "white"}} >About Project</Button>
+                </Link>
+                <Link to="/API">
+                    <Button style={{color: "white"}} >API</Button>
                 </Link>
             </Toolbar>
         </AppBar>
